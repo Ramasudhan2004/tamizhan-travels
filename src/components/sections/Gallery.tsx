@@ -7,20 +7,22 @@ import Reveal from '@/components/fx/Reveal';
 import { resolveImageUrl } from '@/lib/sanity/queries';
 import { cn } from '@/lib/utils';
 
-type Props = { collections: GalleryCollection[]; items?: any[] };
+type Props = { collections?: GalleryCollection[]; items?: any[] };
 
 const CATEGORIES = ['All', 'Trip Memories', 'Pilgrimages', 'On The Road'] as const;
 
-export default function Gallery({ collections }: Props) {
+export default function Gallery({ collections = [] }: Props) {
   const [activeTab, setActiveTab] = useState('All');
   const [openCollection, setOpenCollection] = useState<GalleryCollection | null>(null);
 
+  const safeCollections = collections ?? [];
+
   const filtered = useMemo(() =>
-    activeTab === 'All' ? collections : collections.filter((c) => c.category === activeTab),
-    [collections, activeTab]
+    activeTab === 'All' ? safeCollections : safeCollections.filter((c) => c.category === activeTab),
+    [safeCollections, activeTab]
   );
 
-  const totalMemories = collections.reduce((sum, c) => sum + (c.media?.length ?? 0), 0);
+  const totalMemories = safeCollections.reduce((sum, c) => sum + (c.media?.length ?? 0), 0);
 
   return (
     <section id="gallery" className="relative py-28 lg:py-36 bg-bg-1/50">

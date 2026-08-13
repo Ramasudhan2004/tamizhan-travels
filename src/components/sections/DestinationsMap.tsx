@@ -6,15 +6,16 @@ import type { Destination } from '@/types/cms';
 import Reveal from '@/components/fx/Reveal';
 import { resolveImageUrl } from '@/lib/sanity/queries';
 
-type Props = { destinations: Destination[] };
+type Props = { destinations?: Destination[] };
 
 const INITIAL_SHOW = 6;
 
-export default function DestinationsMap({ destinations }: Props) {
+export default function DestinationsMap({ destinations = [] }: Props) {
   const [selected, setSelected] = useState<Destination | null>(null);
   const [showAll, setShowAll] = useState(false);
 
-  const visible = showAll ? destinations : destinations.slice(0, INITIAL_SHOW);
+  const safeDestinations = destinations ?? [];
+  const visible = showAll ? safeDestinations : safeDestinations.slice(0, INITIAL_SHOW);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -79,7 +80,7 @@ export default function DestinationsMap({ destinations }: Props) {
                     <MapPin className="mt-0.5 h-4 w-4 flex-none text-gold/70 transition-colors group-hover:text-gold" />
                   </div>
                   <div className="mt-4 flex flex-wrap gap-1.5">
-                    {d.highlights.slice(0, 3).map((h) => (
+                    {(d.highlights ?? []).slice(0, 3).map((h) => (
                       <span key={h} className="rounded-full border border-gold/20 bg-gold/[0.07] px-2.5 py-0.5 text-[10px] uppercase tracking-[0.18em] text-gold/80">
                         {h}
                       </span>

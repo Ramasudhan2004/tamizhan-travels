@@ -17,11 +17,17 @@ const HeroCanvas = dynamic(() => import('@/components/three').then((m) => m.Hero
   ),
 });
 
-type Props = { hero: HeroBanner };
+type Props = { hero?: HeroBanner };
 
 export default function Hero3D({ hero }: Props) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  const headline = hero?.headline ?? 'EVERY JOURNEY BEGINS WITH TRUST';
+  const eyebrowText = hero?.eyebrow ?? 'PREMIUM TRAVEL & LUXURY TRANSPORTATION';
+  const subheadingText = hero?.subheading ?? 'Sanitized cabs, luxury tempo travellers & mini buses from Tiruppur to South India.';
+  const primaryCta = hero?.ctaPrimary?.label ?? 'Book Your Journey';
+  const secondaryCta = hero?.ctaSecondary?.label ?? 'Our Services';
 
   return (
     <section id="hero" className="relative isolate min-h-[100svh] w-full overflow-hidden pt-20">
@@ -40,19 +46,19 @@ export default function Hero3D({ hero }: Props) {
           <Reveal delay={0.05}>
             <span className="eyebrow">
               <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_10px_#D4AF37]" />
-              {hero.eyebrow}
+              {eyebrowText}
             </span>
           </Reveal>
 
           <Reveal delay={0.15}>
             <h1 className="heading-display mt-6 text-[clamp(2.6rem,6.8vw,6.5rem)] text-shadow-gold">
-              <span className="gold-text">{hero.headline.slice(0, 5)}</span>{hero.headline.slice(5)}
+              <span className="gold-text">{headline.slice(0, 5)}</span>{headline.slice(5)}
             </h1>
           </Reveal>
 
           <Reveal delay={0.3}>
             <p className="mt-8 max-w-xl text-[17px] leading-relaxed text-soft/90 lg:text-lg">
-              {hero.subheading}
+              {subheadingText}
             </p>
           </Reveal>
 
@@ -63,7 +69,7 @@ export default function Hero3D({ hero }: Props) {
                 onClick={() => scrollToId('booking', 80)}
                 className="h-14 px-8 text-[15px] w-full sm:w-auto justify-center"
               >
-                {hero.ctaPrimary.label}
+                {primaryCta}
                 <ArrowRight className="h-4 w-4" />
               </MagneticButton>
               <MagneticButton
@@ -71,7 +77,7 @@ export default function Hero3D({ hero }: Props) {
                 onClick={() => scrollToId('services', 80)}
                 className="h-14 px-8 text-[15px] w-full sm:w-auto justify-center"
               >
-                {hero.ctaSecondary.label}
+                {secondaryCta}
               </MagneticButton>
             </div>
           </Reveal>
