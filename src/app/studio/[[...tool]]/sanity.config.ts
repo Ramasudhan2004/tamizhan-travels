@@ -52,5 +52,8 @@ export default defineConfig({
           ]),
     }),
   ],
+  document: {
+    actions: (prev) => prev,
+  },
   schema: { types: schemaTypes },
 });

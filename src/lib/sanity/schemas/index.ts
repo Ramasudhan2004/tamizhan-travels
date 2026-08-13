@@ -155,6 +155,7 @@ export const galleryCollection = defineType({
       description: 'Add all photos and videos from this trip',
       of: [
         {
+          name: 'mediaItem',
           type: 'object',
           title: 'Media Item',
           preview: {

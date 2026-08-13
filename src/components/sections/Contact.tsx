@@ -79,8 +79,8 @@ export default function Contact({ contact }: Props) {
                 </ContactRow>
 
                 <ContactRow icon={<Mail className="h-5 w-5 text-gold" />} label="Email">
-                  <a href="mailto:hello@tamizhantravels.in" className="text-[15px] text-soft/85 hover:text-gold data-interactive">
-                    hello@tamizhantravels.in
+                  <a href="mailto:ravir11111980@gmail.com" className="text-[15px] text-soft/85 hover:text-gold data-interactive">
+                    ravir11111980@gmail.com
                   </a>
                 </ContactRow>
               </ul>

@@ -79,7 +79,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <IconWrap><Mail className="h-4 w-4 text-gold" /></IconWrap>
-                <a className="hover:text-gold data-interactive" href="mailto:hello@tamizhantravels.in">hello@tamizhantravels.in</a>
+                <a className="hover:text-gold data-interactive" href="mailto:ravir11111980@gmail.com">ravir11111980@gmail.com</a>
               </li>
               <li className="flex items-center gap-3">
                 <IconWrap><Clock className="h-4 w-4 text-gold" /></IconWrap>

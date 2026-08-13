@@ -85,56 +85,56 @@ export default function Hero3D({ hero }: Props) {
           </Reveal>
         </div>
 
-        {/* Right: Vehicle showcase cards */}
+        {/* Right: Premium Vehicle Showcase Image (front.png) */}
         <div className="relative z-10 lg:col-span-5 xl:col-span-5">
-          <div className="relative mx-auto grid max-w-md gap-6 lg:max-w-none lg:grid-cols-1">
-            {hero.featuredVehicles.map((v, i) => (
+          <Reveal delay={0.25}>
+            <div className="relative mx-auto max-w-lg lg:max-w-none group">
+              {/* Golden Ambient Aura Behind Image */}
               <div
-                key={v.name + i}
-                style={{
-                  animationDelay: `${0.4 + i * 0.15}s`,
-                  zIndex: 10 - i,
-                }}
-                className={cn(
-                  'relative reveal-item',
-                  i === 0 && 'lg:translate-x-[-10%] lg:translate-y-6',
-                  i === 1 && 'lg:translate-x-[10%] lg:-translate-y-2',
-                  i === 2 && 'lg:translate-x-[-4%] lg:-translate-y-10',
-                )}
-              >
-                <div className="glass-gold rounded-2xl p-5 overflow-hidden border-gold-gradient">
-                  <div className="relative h-52 w-full overflow-hidden rounded-xl">
-                    <img
-                      src={resolveImageUrl(v.image as any)}
-                      alt={v.name}
-                      loading="eager"
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                    <div className="absolute left-3 top-3">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-black/55 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-gold-200 border border-gold/30">
-                        <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-                        {v.tag}
-                      </span>
-                    </div>
+                aria-hidden
+                className="pointer-events-none absolute -inset-4 rounded-[2.5rem] bg-gradient-to-tr from-gold/30 via-gold/10 to-transparent blur-2xl opacity-70 group-hover:opacity-100 transition-opacity duration-700"
+              />
+
+              <div className="glass-gold relative overflow-hidden rounded-[2.2rem] p-3.5 border border-gold/35 shadow-[0_0_50px_rgba(212,175,55,0.2)]">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.8rem] bg-black/40">
+                  <img
+                    src="/front.png"
+                    alt="Tamizhan Travels Premium Fleet & Vehicles"
+                    loading="eager"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                  {/* Top Badge */}
+                  <div className="absolute left-4 top-4">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-black/75 backdrop-blur-md px-3.5 py-1.5 text-[11px] uppercase tracking-[0.24em] text-gold-200 shadow-md">
+                      <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
+                      Premium Fleet
+                    </span>
                   </div>
-                  <div className="mt-5 flex items-end justify-between">
+
+                  {/* Bottom Info Overlay */}
+                  <div className="absolute inset-x-5 bottom-5 flex items-end justify-between">
                     <div>
-                      <p className="font-display text-[18px] font-semibold text-white">{v.name}</p>
-                      <p className="mt-1 text-[12px] text-muted">Luxury interiors · Professional driver</p>
+                      <p className="font-display text-[20px] font-bold text-white drop-shadow-md">
+                        Tamizhan Luxury Fleet
+                      </p>
+                      <p className="mt-1 text-[12px] text-gold-200/90 font-medium">
+                        Luxury Cabs · Tempo Travellers · Mini Buses
+                      </p>
                     </div>
                     <button
                       onClick={() => scrollToId('booking', 80)}
                       data-interactive
-                      className="inline-flex h-10 items-center gap-2 rounded-xl border border-gold/40 bg-gold/10 px-4 text-[12px] font-semibold uppercase tracking-widest text-gold-200 hover:bg-gold hover:text-bg-0 transition-colors duration-200"
+                      className="inline-flex h-11 items-center gap-2 rounded-2xl bg-gold-gradient px-4 text-[12px] font-bold uppercase tracking-wider text-bg-0 shadow-gold-glow hover:scale-105 transition-all duration-300"
                     >
-                      Book <ArrowRight className="h-3.5 w-3.5" />
+                      Book <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          </Reveal>
         </div>
       </div>
 
