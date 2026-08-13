@@ -1,11 +1,11 @@
 import type { HomepageData } from '@/types/cms';
-import { HOMEPAGE_QUERY, sanityClient } from './client';
+import { HOMEPAGE_QUERY, sanityClient, urlFor } from './client';
 import { seedData } from './seed';
 
 export async function fetchHomepage(): Promise<HomepageData> {
   try {
     if (sanityClient) {
-      const res = (await sanityClient.fetch(HOMEPAGE_QUERY, {}, { next: { revalidate: 60 } })) as any;
+      const res = (await sanityClient.fetch(HOMEPAGE_QUERY, {}, { next: { tags: ['sanity'], revalidate: 60 } })) as any;
       if (res) {
         return {
           hero:         res.hero?.headline         ? res.hero         : seedData.hero,
@@ -25,13 +25,17 @@ export async function fetchHomepage(): Promise<HomepageData> {
   return seedData;
 }
 
-export function resolveImageUrl(img?: { asset?: { url?: string }; placeholderUrl?: string; url?: string }): string {
+export function resolveImageUrl(img?: any): string {
   if (!img) return '';
-  // Sanity asset URL takes priority — placeholderUrl is only a fallback for seed data
-  return (
-    img.asset?.url ||
-    img.url ||
-    img.placeholderUrl ||
-    ''
-  );
+  if (typeof img === 'string') return img;
+  if (img.asset?.url) return img.asset.url;
+  if (img.url) return img.url;
+  if (img.placeholderUrl) return img.placeholderUrl;
+  try {
+    const url = urlFor(img);
+    if (url) return url;
+  } catch {
+    // ignore
+  }
+  return '';
 }
